@@ -1,0 +1,149 @@
+@use "@/assets/styles/mixins";
+@use "@/assets/styles/webkit";
+
+:root {
+	--bg: #111;
+	--mg: #222;
+	--fg: #333;
+	--txt: #eee;
+	--accent: #0f9ca5ff;
+	--accent-hover: rgb(81, 191, 199);
+
+	--br: 10px;
+	--bs: 0 0 10px var(--bg);
+
+	--scrollbar-hover: #414141;
+	--scrollbar-active: #737373;
+}
+
+* {
+	box-sizing: border-box;
+	font-family: "Roboto", sans-serif;
+	margin: 0;
+	outline-color: var(--accent);
+	outline-style: solid;
+	outline-width: 0px;
+	padding: 0;
+	scrollbar-color: var(--fg) var(--bg);
+	scrollbar-width: thin;
+	transition: 0.1s;
+
+	&:focus {
+		outline-width: 3px;
+	}
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: "Montserrat", sans-serif;
+}
+
+p,
+input,
+li,
+a {
+	font-size: 1rem;
+}
+
+body {
+	@include mixins.flexbox(column);
+	background-color: var(--bg);
+	color: var(--txt);
+	padding-block: 1em;
+}
+
+main {
+	@include mixins.container();
+	@include mixins.flexbox(column);
+
+	> header {
+		padding: 2em !important;
+	}
+}
+
+a.text {
+	color: var(--accent);
+
+	&:visited {
+		color: var(--accent);
+	}
+
+	&:hover {
+		color: var(--accent-hover);
+	}
+}
+
+button {
+	@include mixins.button();
+}
+
+input {
+	background-color: var(--fg);
+	border: none;
+	color: var(--txt);
+}
+
+.card {
+	@include mixins.container();
+	@include mixins.flexbox(column);
+	background-color: var(--mg);
+	border-radius: var(--br);
+	padding: 1em;
+
+	&.small {
+		@include mixins.container(true);
+	}
+}
+
+.games-container {
+	@include mixins.flexbox();
+	@include mixins.flexbox-align(center, center);
+	flex-wrap: wrap;
+}
+
+.game-card {
+	aspect-ratio: 4/5;
+	border-radius: var(--br);
+	box-shadow: var(--bs);
+	flex-basis: 200px;
+	overflow: hidden;
+	position: relative;
+
+	img {
+		filter: brightness(25%);
+		height: 100%;
+		object-fit: cover;
+		pointer-events: none;
+		position: absolute;
+		width: 100%;
+		z-index: 0;
+	}
+
+	p {
+		bottom: 1em;
+		font-size: 1.2em;
+		left: 50%;
+		position: absolute;
+		transform: translateX(-50%);
+	}
+
+	button.remove {
+		@include mixins.button();
+		@include mixins.flexbox();
+		@include mixins.flexbox-align(center, center);
+		aspect-ratio: 1;
+		background-color: var(--bg);
+		border-radius: 100vmax;
+		position: absolute;
+		right: 1em;
+		top: 1em;
+
+		&:hover {
+			background-color: lightcoral;
+		}
+	}
+}

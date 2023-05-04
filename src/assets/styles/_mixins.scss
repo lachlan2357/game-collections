@@ -1,0 +1,65 @@
+@mixin button {
+	@include focus-visible();
+	background-color: var(--bg);
+	border: none;
+	border-radius: var(--br);
+	color: var(--txt);
+	cursor: pointer;
+	display: block;
+	font-size: 0.85rem;
+	padding: 0.5em 1em;
+	text-align: center;
+	text-decoration: none;
+
+	&[disabled] {
+		background-color: var(--fg);
+		color: var(--bg);
+		cursor: not-allowed;
+	}
+
+	&[data-action="delete"] {
+		background-color: lightcoral;
+		color: var(--bg);
+
+		&:hover {
+			background-color: darkred;
+			color: var(--txt);
+		}
+	}
+
+	&:not([disabled]):hover {
+		background-color: var(--accent);
+		color: var(--bg);
+	}
+}
+
+@mixin container($small: false) {
+	margin-inline: auto;
+
+	@if $small {
+		width: min(90%, 720px);
+	} @else {
+		width: min(95%, 1280px);
+	}
+}
+
+@mixin flexbox($direction: row, $gap: 1em) {
+	display: flex;
+	flex-direction: $direction;
+	gap: $gap;
+}
+
+@mixin flexbox-align($justify: unset, $align: unset) {
+	align-items: $align;
+	justify-content: $justify;
+}
+
+@mixin focus-visible() {
+	&:focus {
+		outline-width: 0px;
+	}
+
+	&:focus-visible {
+		outline-width: 3px;
+	}
+}
